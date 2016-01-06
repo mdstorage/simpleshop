@@ -1,0 +1,3 @@
+periscope:
+    resource: "@PeriscopeBundle/Controller/"
+    type:     annotation

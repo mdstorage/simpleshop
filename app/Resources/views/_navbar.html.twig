@@ -1,0 +1,53 @@
+<nav class="navbar navbar-inverse " role="navigation" style="background-color:#000; background-image: url({{ asset('bundles/app/images/photo.jpg') }})">
+    <div class="container" style="height: 0px;">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="{{ path('homepage') }}" style="height: 72px;"><img src="{{ asset('bundles/app/images/logo.png') }}" style="margin-top: 13px;" alt=""></a><br>
+		            <span class="navbar-brand visible-md visible-lg" style="background-img: url('{{ asset('bundles/app/images/logo.png') }}') ;height: 72px;padding-left:17px; color:#ebebeb;font-size:18px;margin-top:10px;font-weight:700;">
+		                {{ headerText|raw() }}
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <div class="vh visible-md visible-lg">
+                    <span> {{ contacts|raw() }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar-collapse collapse" style="left:0;right:0;        background: -moz-linear-gradient(top, #242424 0%, #000000 100%);
+        background-image: -webkit-linear-gradient(top, #242424 0%, #000000 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#242424), color-stop(100%,#000000));
+        background-image: -ms-linear-gradient(top, #242424 0%, #000000 100%);
+        background-image: -o-linear-gradient(linear, left top, left bottom, color-stop(0%,#242424), color-stop(100%,#000000));border-top:1px solid #3c3c3c;height:44px;">
+        <div class="container">
+
+            <ul class="nav navbar-nav">
+
+                <li><a href="{{ path('homepage') }}">Главная</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Услуги <b class="caret"></b></a>
+                    <ul class="dropdown-menu" style="text-align: left; color: #FFFFFF; background-color: #5c5c5c;">
+                        {% for serviceGroup in serviceGroups %}
+                            <li><a href="{{ path('service_list', {'serviceGroupSlug': serviceGroup.slug}) }}">{{ serviceGroup.getName }}</a></li>
+                            {% if not loop.last %}
+                                <li class="divider"></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li><a href="{{ path('article_list') }}">Статьи</a></li>
+                <li><a href="{{ path('vacant') }}">Вакансии</a></li>
+                <li><a href="{{ path('contacts') }}">Контакты</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

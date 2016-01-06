@@ -1,0 +1,88 @@
+services:
+    sonata.admin.mainpage:
+        class: AppBundle\Admin\MainPageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Настройки содержимого", label: "Главная страница" }
+        arguments:
+            - ~
+            - AppBundle\Entity\MainPage
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+
+    sonata.admin.head:
+        class: AppBundle\Admin\HeadAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Настройки содержимого", label: "Шапка" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Head
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+
+    sonata.admin.service_group:
+        class: AppBundle\Admin\ServiceGroupAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Услуги", label: "Группы услуг" }
+        arguments:
+            - ~
+            - AppBundle\Entity\ServiceGroup
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+
+    sonata.admin.service:
+        class: AppBundle\Admin\ServiceAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Услуги", label: "Услуги" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Service
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+
+    sonata.admin.contacts:
+        class: AppBundle\Admin\ContactsAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Настройки содержимого", label: "Контакты" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Contacts
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+
+    sonata.admin.vacant:
+        class: AppBundle\Admin\VacantAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Настройки содержимого", label: "Вакансии" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Vacant
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+
+    sonata.admin.tag:
+        class: AppBundle\Admin\TagAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Настройки содержимого", label: "Тэги" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Tag
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+
+    sonata.admin.article:
+        class: AppBundle\Admin\ArticleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Информация", label: "Статьи" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Article
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]

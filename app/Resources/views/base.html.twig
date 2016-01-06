@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html class="no-js" lang="en"><!--<![endif]-->
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name='yandex-verification' content='7645bb41579c1445' />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="{% block description %}{% endblock description %}" name="description">
+        <meta content="{% block keywords %}{% endblock keywords %}" name="keywords">
+        {% include('vk.script.html.twig') %}
+        <title>{% block title %}Carwest!{% endblock title%}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('bundles/app/css/bootstrap.min.css') }}"/>
+            <link rel="stylesheet" href="{{ asset('bundles/app/css/bootstrap-modal.css') }}"/>
+            <link rel="stylesheet" href="{{ asset('bundles/app/css/style_n.css') }}"/>
+            <link rel="stylesheet" href="{{ asset('bundles/app/css/css.css') }}"/>
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <div id="fb-root"></div>
+        {% include('facebook.script.html.twig') %}
+{#   {{ render(controller('AppBundle:MainPage:getHeader')) }}#}
+   <div class="container">
+       <div class="breadcrumbs">
+           {% block breadcrumbs %}{% endblock breadcrumbs %}
+       </div>
+   </div>
+   {% block body %}
+   <div class="container">
+       <div class="row">
+           <div class="col-sm-12 col-md-8 col-lg-8">
+               {% block content%}{% endblock content %}
+           </div>
+           <div class="col-sm-12 col-md-4 col-lg-4">
+               {{ render(controller('AppBundle:Base:getCallMeForm')) }}
+               {% block side %}{% endblock side %}
+           </div>
+       </div>
+   </div>
+   {% endblock body%}
+
+   {% block footer %}
+   <div class="container">
+           <div class="footer" id="footer">
+               <div class="row">
+                   <p class="text-muted" style="text-align: left;"><a href="{{ path('sonata_admin_redirect') }}">CarWest.by</a> © 2012-2014 {{ block('title') }}</p>
+                   <p>Частное предприятие «Карвест»<br/>УНП 191312718<br/>ОКПО 379088755000<br/>р/с 3012046520019 в ОАО "Банк Москва-Минск" г. Минск<br/>код 153001272</p>
+                   <p>{% include('yandex.metrika.informer.html.twig') %}</p>
+               </div>
+           </div>
+   </div>
+   {% endblock footer %}
+   {% block javascripts %}
+       <script type="text/javascript" src="{{ asset('bundles/app/js/vendor/jquery-2.1.4.min.js') }}"></script>
+       <script type="text/javascript" src="{{ asset('bundles/app/js/vendor/bootstrap.min.js') }}"></script>
+       <script type="text/javascript" src="{{ asset('bundles/app/js/vendor/bootstrap-modal.js') }}"></script>
+       <script type="text/javascript" src="{{ asset('bundles/app/js/base.js') }}"></script>
+       {% include('yandex.metrika.counter.html.twig') %}
+       {{ tinymce_init() }}
+   {% endblock %}
+</body>
+</html>

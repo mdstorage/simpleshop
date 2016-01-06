@@ -1,0 +1,41 @@
+{% extends '::base.html.twig' %}
+{% block title %}
+    {{ serviceGroup.name }}. Ремонт электрооборудования в Минске.
+{% endblock title %}
+{% block breadcrumbs %}
+    <a href="{{ path('homepage') }}">Главная</a> /
+    {{ serviceGroup.name }}
+{% endblock breadcrumbs %}
+{% block content %}
+
+        <h1>
+            {{ block('title') }}
+        </h1>
+
+        {% for service in services %}
+            {% if service.isVisible %}
+                {% include ':service:_list_part.html.twig' with {'service': service} %}
+            {% endif %}
+        {% endfor %}
+
+        {% if pagesCount > 1 %}
+            <div class="row" style="text-align: center">
+                <h4>
+                    Страницы:
+                </h4>
+                <ul class="pagination pagination-sm" >
+                    <li class="{% if page == 1 %}disabled{% endif %}"><a href="{{ path('service_list', {'serviceGroupSlug': serviceGroup.slug, 'page': 1}) }}">&laquo;</a></li>
+                    {% for currentPage in 1..pagesCount %}
+                        <li class="{% if page == currentPage %}active{% endif %}"><a href="{{ path('service_list', {'serviceGroupSlug': serviceGroup.slug, 'page': currentPage}) }}">{{ currentPage }}</a></li>
+                    {% endfor %}
+                    <li class="{% if page == pagesCount %}disabled{% endif %}"><a href="{{ path('service_list', {'serviceGroupSlug': serviceGroup.slug, 'page': pagesCount}) }}">&raquo;</a></li>
+                </ul>
+            </div>
+
+        {% endif %}
+
+{% endblock content %}
+{% block side %}
+    <br/>
+    {% include '_articles.html.twig' with {'title': 'СТАТЬИ', 'articles': articles} %}
+{% endblock side %}

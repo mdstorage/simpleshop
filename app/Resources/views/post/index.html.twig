@@ -1,0 +1,43 @@
+{% extends 'AcmeDemoBundle::layout.html.twig' %}
+{% block fos_user_content %}
+
+    {% if is_granted('ROLE_USER') %}
+        <div><a href="{{ path("post_new") }}">Новое сообщение</a></div>
+    {% endif %}
+
+    {% for post in posts %}
+        <h2>{{ post.title}}</h2>
+        <p>{{ post.description|raw() }}</p>
+        <div>by {{ post.user.username }}</div>
+
+
+{% if is_granted('ROLE_ADMIN') %}
+<form action="{{ path("post_delete") }}" method="post">
+    <input name="filter" class="form-control" value="{{ post.id }}" type="text" style="display:none;"/>
+
+    <input type="submit" class="symfony-button-grey" value="Удалить запись"/>
+</form>
+{% endif %}
+
+    {#        <input type="button" class="btn btn-info" value="Удалить статью" id="vin-button{{ post.id }}"/>
+           <div id="vin-result"></div>
+
+
+        {% block vinScript %}
+               <script>
+                   $("#vin-button{{ post.id }}").on('click', function(){
+                       $.ajax({
+                           type:   'POST',
+                           async:  false,
+                           url:    "{{ path('post_delete') }}",
+                           data:   { id: '{{ post.id }}' },
+                       });
+                   });
+               </script>
+           {% endblock vinScript %}#}
+    {% else %}
+        Пока в блоге нет статей.
+    {% endfor %}
+
+
+{% endblock %}

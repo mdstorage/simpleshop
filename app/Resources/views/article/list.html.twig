@@ -1,0 +1,22 @@
+{% extends '::base.html.twig' %}
+{% block title %}
+    Статьи
+{% endblock title %}
+{% block breadcrumbs %}
+    <a href="{{ path('homepage') }}">Главная</a> /
+    Статьи
+{% endblock breadcrumbs %}
+{% block body %}
+    <div class="container">
+        <h1>
+            {{ block('title') }}
+        </h1>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                {% for article in articles %}
+                    {% include ':article:_list_item.html.twig' with {'article': article} %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock body %}

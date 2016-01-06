@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ vacant.title }}{% endblock title %}
+
+{% block breadcrumbs %}
+    <a href="{{ path('homepage') }}">Главная</a> /
+    {{ block('title') }}
+{% endblock breadcrumbs %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ block('title') }}</h1>
+        {{ vacant.text|raw() }}
+    </div>
+{% endblock body %}

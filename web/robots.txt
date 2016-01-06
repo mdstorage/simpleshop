@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /periscope
+Disallow: /admin
+Sitemap: http://carwest.by/sitemap.xml

@@ -1,0 +1,87 @@
+{% extends 'PeriscopeBundle::base.html.twig' %}
+{% block body %}
+    <h1  class="alert alert-info">Общая информация</h1>
+    {% for testsuite in periscope %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Папка тестирования: {{ testsuite.attributes.name }}</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered">
+                <tr>
+                    <td>Количество тестов</td>
+                    <td>{{ testsuite.attributes.tests }}</td>
+                </tr>
+                <tr>
+                    <td>Количество сравнений</td>
+                    <td>{{ testsuite.attributes.assertions }}</td>
+                </tr>
+                <tr>
+                    {% set failures_class = (testsuite.attributes.failures > 0) ? "warning" : "success"%}
+                    <td class={{ failures_class }}>Количество несоответствий</td>
+                    <td class={{ failures_class }}>{{ testsuite.attributes.failures }}</td>
+                </tr>
+                <tr>
+                    {% set errors_class = (testsuite.attributes.errors > 0) ? "danger" : "success"%}
+                    <td class={{ errors_class }}>Количество ошибок</td>
+                    <td class={{ errors_class }}>{{ testsuite.attributes.errors }}</td>
+                </tr>
+                <tr>
+                    <td>Время, затраченное на тесты, с</td>
+                    <td>{{ testsuite.attributes.time }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    {% endfor %}
+    <h1  class="alert alert-warning">Несоответствия</h1>
+    {% if periscope.xpath("//testsuite/testcase/failure") %}
+    <table class="table table-bordered">
+        <thead>
+            <th>Тип</th>
+            <th>Содержание</th>
+        </thead>
+        <tbody>
+        {% for failure in periscope.xpath("//testsuite/testcase/failure") %}
+            <tr>
+                <td>{{ failure.attributes.type }}</td>
+                <td>{{ failure|nl2br() }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                Несоответствий нет
+            </div>
+        </div>
+    {% endif %}
+    <h1  class="alert alert-danger">Ошибки</h1>
+    {% if periscope.xpath("//testsuite/testcase/error") %}
+        <div class="panel-group" id="accordion">
+            {% for error in periscope.xpath("//testsuite/testcase/error") %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#{{ loop.index }}">
+                                Ошибка #{{ loop.index }} - {{ error.attributes.type }}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="{{ loop.index }}" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            {{ error|nl2br() }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                Ошибок нет
+            </div>
+        </div>
+    {% endif %}
+{% endblock body %}

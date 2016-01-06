@@ -1,0 +1,37 @@
+{% extends '::base.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    {{ contacts.getMapCode()|replace({
+        '%x%': contacts.getMapX(),
+        '%y%': contacts.getMapY(),
+        '%hint%': contacts.getMapPointHint(),
+        '%info%': contacts.getMapPointInformation()
+    })|raw() }}
+{% endblock javascripts %}
+{% block title %}Контакты{% endblock title %}
+{% block breadcrumbs %}
+    <a href="{{ path('homepage') }}">Главная</a> /
+    Контакты
+{% endblock breadcrumbs %}
+{% block body %}
+    <div class="container">
+        <h1>{{ block('title') }}</h1>
+        <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xl-5 ">
+                <h2>Телефоны:</h2>
+                {{ contacts.getPhones()|raw() }}
+                <h2>Электронная почта:<h2>
+                {{ contacts.getEmail()|raw() }}
+                <h2>Реквизиты:<h2>
+                {{ contacts.getEssential()|raw() }}
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xl-7 ">
+                <h2>Карта:</h2>
+                <div id="map" style="width: 600px; height: 400px"></div>
+                <h2>Схема проезда развязки:</h2>
+                {{ contacts.getJunctionSchema()|raw() }}
+            </div>
+        </div>
+    </div>
+{% endblock body %}

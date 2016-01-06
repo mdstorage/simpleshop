@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html class="no-js" lang="en"><!--<![endif]-->
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>{% block title %}Periscope!{% endblock title%}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('bundles/periscope/css/bootstrap.min.css') }}"/>
+    {% endblock %}
+    {% block javascripts %}
+        <script type="text/javascript" src="{{ asset('bundles/app/js/vendor/jquery-2.1.4.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/periscope/js/bootstrap.min.js') }}"></script>
+    {% endblock javascripts %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('periscope_default_index') }}">Periscope</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="{{ "tests" not in app.request.pathInfo ? 'active' }}"><a href="{{ path('periscope_default_index') }}">Общая информация</a></li>
+                <li class="{{ "tests" in app.request.pathInfo ? 'active' }}"><a href="{{ path('periscope_default_tests') }}">Тесты</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    {% block body %}{% endblock body %}
+</div>
+</body>

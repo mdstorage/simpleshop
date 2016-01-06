@@ -1,0 +1,9 @@
+<div>
+    <h2>
+        {{ article.title }}
+    </h2>
+    <div class="article_annotation">
+        {{ article.annotation|raw() }}
+        <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}">читать полностью...</a>
+    </div>
+</div>

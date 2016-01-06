@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name='yandex-verification' content='7645bb41579c1445' />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <link rel="stylesheet" href="{{ asset('bundles/app/css/bootstrap.min.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('bundles/app/css/bootstrap-modal.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('bundles/app/css/css.css') }}"/>
+        <meta charset="UTF-8" />
+        {{ elfinder_tinymce_init4('default') }}
+        {{ tinymce_init() }}
+    </head>
+    <body>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/vendor/jquery-2.1.4.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/vendor/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/vendor/bootstrap-modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/base.js') }}"></script>
+
+
+
+        <div>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                <a href="{{ path('fos_user_security_logout') }}">
+                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                </a>
+            {% else %}
+                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+            {% endif %}
+        </div>
+
+        {% for type, messages in app.session.flashBag.all %}
+            {% for message in messages %}
+                <div class="{{ type }}">
+                    {{ message|trans({}, 'FOSUserBundle') }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <div>
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+        </div>
+    </body>
+</html>

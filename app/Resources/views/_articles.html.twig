@@ -1,0 +1,7 @@
+<div id="b_u">
+    <p style="color:#ececec;font-size:20px;font-weight:700;border-bottom:1px solid #494949;height: 40px;">{{ title }}:</p>
+    {% for article in articles %}
+        <p style="color:#afaeae;"><a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}">{{ article.title }}</a></p>
+    {% endfor %}
+</div>
+<br/>
